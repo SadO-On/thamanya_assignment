@@ -1,6 +1,8 @@
 package com.sadondev.thamanya_assignment.data.remote
 
 import com.sadondev.thamanya_assignment.data.remote.model.MainContentRemote
+import com.sadondev.thamanya_assignment.domain.mapper.toDomain
+import com.sadondev.thamanya_assignment.domain.models.MainContent
 import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.client.call.body
@@ -9,9 +11,13 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.retryWhen
+import kotlinx.serialization.json.Json
 
-class DefaultThamanyaAPI(private val client: HttpClient) : ThamanyaAPI {
+class DefaultThamanyaAPI(
+    private val client: HttpClient,
+) : ThamanyaAPI {
     override fun getMainContent(): Flow<MainContentRemote> = flow {
         val payload: MainContentRemote = client.get(MAIN_CONTENT_URL).body()
         emit(payload)

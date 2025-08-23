@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace = "com.sadondev.thamanya_assignment"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.sadondev.thamanya_assignment"
@@ -57,6 +57,8 @@ dependencies {
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.ktor.client.android)
     implementation(libs.koin.android)
+    implementation(libs.coil)
+    implementation(libs.coil.network)
     implementation(libs.koin.android.compose)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

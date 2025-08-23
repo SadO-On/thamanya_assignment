@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Thamanya Assignment</string>
+    <string name="profile_image_content_description">User Profile</string>
 </resources>

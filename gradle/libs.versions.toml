@@ -11,6 +11,7 @@ composeBom = "2024.04.01"
 ktor = "3.2.3"
 kotlinx-serialization = "1.7.1"
 koin-bom = "4.1.0"
+coil = "3.0.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -35,6 +36,8 @@ kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serializa
 ktor-client-android = { module = "io.ktor:ktor-client-android", version.ref = "ktor" }
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin-bom" }
 koin-android-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koin-bom" }
+coil = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil" }
+coil-network = { module = "io.coil-kt.coil3:coil-network-okhttp", version.ref = "coil" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
