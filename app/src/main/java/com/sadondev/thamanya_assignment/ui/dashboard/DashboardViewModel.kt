@@ -15,6 +15,10 @@ class DashboardViewModel(
     private val _uiState = MutableStateFlow<DashboardViewState?>(null)
     val uiState: StateFlow<DashboardViewState?> = _uiState.asStateFlow()
 
+    init {
+        getMainContent()
+    }
+
     fun getMainContent() {
         _uiState.value = DashboardViewState.Loading
         viewModelScope.launch {
