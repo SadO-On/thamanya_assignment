@@ -14,6 +14,8 @@ koin-bom = "4.1.0"
 coil = "3.0.0"
 materialIcon = "1.7.8"
 systemUi = "0.34.0"
+foundation = "1.9.0"
+nav_version = "2.9.3"
 
 
 [libraries]
@@ -43,7 +45,8 @@ coil = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil" }
 coil-network = { module = "io.coil-kt.coil3:coil-network-okhttp", version.ref = "coil" }
 material-icons ={ module ="androidx.compose.material:material-icons-extended", version.ref = "materialIcon"}
 system-ui = {module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "systemUi"}
-
+androidx-foundation = { group = "androidx.compose.foundation", name = "foundation", version.ref = "foundation" }
+compose-navigation = { module = "androidx.navigation:navigation-compose", version.ref = "nav_version"}
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

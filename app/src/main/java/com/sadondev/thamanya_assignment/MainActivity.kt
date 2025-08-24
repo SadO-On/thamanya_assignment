@@ -9,7 +9,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
-import com.sadondev.thamanya_assignment.ui.dashboard.DashboardScreen
 import com.sadondev.thamanya_assignment.ui.dashboard.widgets.ApplySystemBars
 import com.sadondev.thamanya_assignment.ui.theme.ThamanyaAssignmentTheme
 
@@ -23,7 +22,7 @@ class MainActivity : ComponentActivity() {
             ThamanyaAssignmentTheme(darkTheme = isDark, dynamicColor = false) {
                 Surface {
                     ApplySystemBars(darkTheme = isDark)
-                    DashboardScreen(
+                    MainNavGraph(
                         isDark = isDark,
                         onToggle = {
                             isDark = !isDark
@@ -43,4 +42,5 @@ class MainActivity : ComponentActivity() {
  * [] Fix colors
  * [] Make sure All widgets has Preview
  * [] Rive Loading
+ * [] Remove unnecessary comments
  * */

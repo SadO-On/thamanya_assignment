@@ -79,6 +79,8 @@ internal fun AudioArticleRemote.toDomain() = AudioArticle(
     score = score
 )
 
+
+
 // ---------- Section mapper ----------
 internal fun SectionRemote.toDomain(json: Json = DefaultJson): Section {
     val layout = LayoutType.fromRemote(type)
@@ -110,6 +112,14 @@ internal fun SectionRemote.toDomain(json: Json = DefaultJson): Section {
                 .distinctBy { it.id }
             Section.AudioArticles(name = name, layout = layout, order = order, items = items)
         }
+
+        else -> {
+            val items = content.decodeList<PodcastRemote>(json)
+                .map { it.toDomain() }
+                .distinctBy { it.id }
+            Section.Podcasts(name = name, layout = layout, order = order, items = items)
+
+        }
     }
 }
 
@@ -120,7 +130,7 @@ fun MainContentRemote.toDomain(json: Json = DefaultJson): MainContent {
                 Section.Unknown(
                     it.name,
                     LayoutType.fromRemote(it.type),
-                    it.order
+                    it.order,
                 )
             }
         }

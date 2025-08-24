@@ -6,7 +6,14 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.DarkMode
+import androidx.compose.material.icons.filled.LightMode
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -36,6 +43,7 @@ import org.koin.androidx.compose.koinViewModel
 fun DashboardScreen(
     viewModel: DashboardViewModel = koinViewModel(),
     isDark: Boolean,
+    onSearchClick: () -> Unit = {},
     onToggle: () -> Unit
 ) {
     val uiState = viewModel.uiState.collectAsState()
@@ -46,6 +54,7 @@ fun DashboardScreen(
             isDark = isDark,
             onToggle = onToggle,
             nextPage = state.nextPage,
+            onSearchClick = onSearchClick,
             isLoadingMore = state.isLoadingMore,
             onLoadMore = { viewModel.loadNextPage() }
         )
@@ -62,6 +71,7 @@ private fun DashboardContent(
     sections: List<UiSection>,
     isDark: Boolean,
     onToggle: () -> Unit,
+    onSearchClick: () -> Unit = {},
     isLoadingMore: Boolean,
     nextPage: String?,
     onLoadMore: () -> Unit
@@ -95,6 +105,13 @@ private fun DashboardContent(
                         onToggle = onToggle,
                         modifier = Modifier
                     )
+                    IconButton(onClick = onSearchClick) {
+                        Icon(
+                            imageVector = Icons.Filled.Search,
+                            contentDescription = "Search",
+                            tint = MaterialTheme.colorScheme.onSurface
+                        )
+                    }
                 }
                 SectionsRowWidget(
                     sections = sections,
@@ -149,6 +166,7 @@ private fun DashboardContent(
                     onLoadMore = onLoadMore,
                     nextPage = nextPage
                 )
+
                 is UiSection.Unknown -> Text("Unsupported section")
             }
         }

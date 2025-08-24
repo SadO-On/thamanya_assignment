@@ -8,6 +8,7 @@ import com.sadondev.thamanya_assignment.data.remote.ThamanyaAPI
 import com.sadondev.thamanya_assignment.domain.usecases.GetMainContentUseCase
 import com.sadondev.thamanya_assignment.domain.usecases.SearchContentUseCase
 import com.sadondev.thamanya_assignment.ui.dashboard.DashboardViewModel
+import com.sadondev.thamanya_assignment.ui.search.SearchViewModel
 import org.koin.core.module.dsl.bind
 import org.koin.core.module.dsl.singleOf
 import org.koin.core.module.dsl.viewModel
@@ -41,5 +42,8 @@ val useCasesModule = module {
 val viewModelModule = module {
     viewModel {
         DashboardViewModel(useCase = get())
+    }
+    viewModel {
+        SearchViewModel(useCase = get())
     }
 }
