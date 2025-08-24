@@ -23,6 +23,7 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.sadondev.thamanya_assignment.domain.models.Section
 import com.sadondev.thamanya_assignment.ui.theme.ThamanyaAssignmentTheme
 
 /**
@@ -30,7 +31,7 @@ import com.sadondev.thamanya_assignment.ui.theme.ThamanyaAssignmentTheme
  */
 @Composable
 fun SectionsRowWidget(
-    sections: List<String>,
+    sections: List<Section>,
     selectedIndex: Int?,
     onSectionSelected: (Int) -> Unit,
     modifier: Modifier = Modifier,
@@ -63,7 +64,7 @@ fun SectionsRowWidget(
             FilterChip(
                 selected = selected,
                 onClick = { onSectionSelected(index) },
-                label = { androidx.compose.material3.Text(text = label) },
+                label = { androidx.compose.material3.Text(text = label.name) },
                 leadingIcon = if (selected) {
                     { Icon(Icons.Filled.Check, contentDescription = null) }
                 } else null,
@@ -95,7 +96,7 @@ private fun SectionsRowWidgetPreviewLight() {
         Surface {
             var selected by remember { mutableIntStateOf(0) }
             SectionsRowWidget(
-                sections = listOf("All", "Design", "Tech", "Games", "Offers", "News", "Wallet"),
+                sections = emptyList(),
                 selectedIndex = selected,
                 onSectionSelected = { selected = it }
             )
@@ -115,7 +116,7 @@ private fun SectionsRowWidgetPreviewDark() {
         Surface {
             var selected by remember { mutableIntStateOf(3) }
             SectionsRowWidget(
-                sections = listOf("All", "Design", "Tech", "Games", "Offers", "News", "Wallet"),
+                sections = emptyList(),
                 selectedIndex = selected,
                 onSectionSelected = { selected = it }
             )

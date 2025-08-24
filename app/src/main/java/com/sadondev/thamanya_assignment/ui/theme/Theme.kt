@@ -19,7 +19,7 @@ import androidx.compose.ui.platform.LocalContext
 
 private val LightColors = lightColorScheme(
     primary = BrandPrimary,
-    onPrimary = Color.White,
+    onPrimary = Neutral10,
     primaryContainer = PrimaryContainerLight,
     onPrimaryContainer = OnPrimaryContainerLight,
 
@@ -67,7 +67,7 @@ private val DarkColors = darkColorScheme(
     background = Neutral10,
     onBackground = Neutral90,
     surface = Neutral10,
-    onSurface = Neutral90,
+    onSurface = Neutral20,
     surfaceVariant = SurfaceVariantDark,
     onSurfaceVariant = OnSurfaceVariantDark,
     outline = OutlineDark,

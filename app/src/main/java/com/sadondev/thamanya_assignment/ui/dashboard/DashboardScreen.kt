@@ -21,6 +21,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.sadondev.thamanya_assignment.R
+import com.sadondev.thamanya_assignment.domain.models.Section
 import com.sadondev.thamanya_assignment.ui.dashboard.widgets.Avatar
 import com.sadondev.thamanya_assignment.ui.dashboard.widgets.SectionsRowWidget
 import com.sadondev.thamanya_assignment.ui.theme.ThamanyaAssignmentTheme
@@ -33,11 +34,19 @@ fun DashboardScreen(
 ) {
     val uiState = viewModel.uiState.collectAsState()
 
-    DashboardContent()
+    DashboardContent((uiState.value as? DashboardViewState.Data)?.data?.sections ?: emptyList())
+
 
     when (uiState.value) {
-        is DashboardViewState.Data -> {}
-        DashboardViewState.Loading -> {}
+        is DashboardViewState.Data -> {
+
+        }
+
+        DashboardViewState.Loading -> {
+            DashboardContent(emptyList())
+
+        }
+
         is DashboardViewState.Error -> {}
         else -> {}
     }
@@ -45,7 +54,9 @@ fun DashboardScreen(
 
 
 @Composable
-private fun DashboardContent() {
+private fun DashboardContent(
+    sections: List<Section>
+) {
     var selected by remember { mutableIntStateOf(3) }
 
     Scaffold(
@@ -63,7 +74,7 @@ private fun DashboardContent() {
                     Text("Welcome, Mohammed")
                 }
                 SectionsRowWidget(
-                    sections = listOf("All", "Design", "Tech", "Games", "Offers", "News", "Wallet"),
+                    sections = sections,
                     selectedIndex = selected,
                     onSectionSelected = { selected = it }
                 )
@@ -87,7 +98,7 @@ private fun DashboardContent() {
 @Composable
 private fun DashboardContentPreview() {
     ThamanyaAssignmentTheme(darkTheme = false) {
-        Surface { DashboardContent() }
+        Surface { DashboardContent(emptyList()) }
     }
 }
 
@@ -98,6 +109,6 @@ private fun DashboardContentPreview() {
 @Composable
 private fun DashboardContentDarkModePreview() {
     ThamanyaAssignmentTheme(darkTheme = true) {
-        Surface { DashboardContent() }
+        Surface { DashboardContent(emptyList()) }
     }
 }
