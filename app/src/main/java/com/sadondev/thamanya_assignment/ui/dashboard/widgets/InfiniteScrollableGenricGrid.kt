@@ -19,6 +19,7 @@ import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.sadondev.thamanya_assignment.domain.models.LayoutType
+import com.sadondev.thamanya_assignment.domain.models.LayoutType.*
 import com.sadondev.thamanya_assignment.ui.models.UiCard
 import kotlinx.coroutines.flow.distinctUntilChanged
 
@@ -76,18 +77,8 @@ fun InfiniteScrollableGenricGrid(
         columns = GridCells.Fixed(numberOfColumns),
         modifier = modifier
     ) {
-        if (layoutType == LayoutType.BIG_SQUARE) {
-            items(uiCards, key = { it.id }) { card ->
-                BigSquareWidget(
-                    modifier = Modifier,
-                    imageUrl = card.imageUrl,
-                    title = card.title,
-                    duration = card.durationText ?: "",
-                    info = card.subtitle.toString()
-                )
-            }
-        } else {
-            items(uiCards, key = { it.id }) { card ->
+        when (layoutType) {
+            SQUARE -> items(uiCards, key = { it.id }) { card ->
                 SquareWidget(
                     modifier = Modifier,
                     imageUrl = card.imageUrl,
@@ -96,6 +87,38 @@ fun InfiniteScrollableGenricGrid(
                     info = card.subtitle.toString()
                 )
             }
+
+            GRID_2_LINES -> items(uiCards, key = { it.id }) { card ->
+                TwoLineTile(
+                    modifier = Modifier,
+                    imageUrl = card.imageUrl ?: "",
+                    title = card.title,
+                    subtitle = card.subtitle.toString()
+                )
+            }
+
+
+            BIG_SQUARE -> items(uiCards, key = { it.id }) { card ->
+                BigSquareWidget(
+                    modifier = Modifier,
+                    imageUrl = card.imageUrl,
+                    title = card.title,
+                    duration = card.durationText ?: "",
+                    info = card.subtitle.toString()
+                )
+            }
+
+            QUEUE -> items(uiCards, key = { it.id }) { card ->
+                QueueWidget(
+                    modifier = Modifier,
+                    imageUrl = card.imageUrl,
+                    title = card.title,
+                    duration = card.durationText ?: "",
+                    info = card.subtitle.toString()
+                )
+            }
+
+            else -> {}
         }
 
         if (isLoadingMore) {

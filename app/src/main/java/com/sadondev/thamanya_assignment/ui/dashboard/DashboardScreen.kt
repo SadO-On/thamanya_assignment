@@ -14,7 +14,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -24,12 +23,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.sadondev.thamanya_assignment.R
 import com.sadondev.thamanya_assignment.domain.models.LayoutType
-import com.sadondev.thamanya_assignment.domain.models.LayoutType.*
-import com.sadondev.thamanya_assignment.domain.models.Section
+import com.sadondev.thamanya_assignment.domain.models.LayoutType.SQUARE
 import com.sadondev.thamanya_assignment.ui.dashboard.widgets.Avatar
 import com.sadondev.thamanya_assignment.ui.dashboard.widgets.InfiniteScrollableGenricGrid
 import com.sadondev.thamanya_assignment.ui.dashboard.widgets.SectionsRowWidget
-import com.sadondev.thamanya_assignment.ui.dashboard.widgets.SquareGrid
 import com.sadondev.thamanya_assignment.ui.dashboard.widgets.ThemeSwitcherButton
 import com.sadondev.thamanya_assignment.ui.models.UiSection
 import com.sadondev.thamanya_assignment.ui.theme.ThamanyaAssignmentTheme
@@ -126,17 +123,32 @@ private fun DashboardContent(
                     nextPage = nextPage
                 )
 
-                is UiSection.Grid2Lines -> Text("Not Yet") //TwoLineGrid(items = section.items)
-                is UiSection.BigSquare -> InfiniteScrollableGenricGrid(
+                is UiSection.Grid2Lines -> InfiniteScrollableGenricGrid(
                     uiCards = section.items,
                     isLoadingMore = isLoadingMore,
                     numberOfColumns = 2,
-                    layoutType = SQUARE,
+                    layoutType = LayoutType.GRID_2_LINES,
                     onLoadMore = onLoadMore,
                     nextPage = nextPage
                 )
 
-                is UiSection.Queue -> Text("Not Yet")// QueueList(items = section.items)
+                is UiSection.BigSquare -> InfiniteScrollableGenricGrid(
+                    uiCards = section.items,
+                    isLoadingMore = isLoadingMore,
+                    numberOfColumns = 2,
+                    layoutType = LayoutType.BIG_SQUARE,
+                    onLoadMore = onLoadMore,
+                    nextPage = nextPage
+                )
+
+                is UiSection.Queue -> InfiniteScrollableGenricGrid(
+                    uiCards = section.items,
+                    isLoadingMore = isLoadingMore,
+                    numberOfColumns = 1,
+                    layoutType = LayoutType.QUEUE,
+                    onLoadMore = onLoadMore,
+                    nextPage = nextPage
+                )
                 is UiSection.Unknown -> Text("Unsupported section")
             }
         }
