@@ -3,14 +3,16 @@ package com.sadondev.thamanya_assignment.ui.dashboard
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sadondev.thamanya_assignment.domain.usecases.GetMainContentUseCase
+import com.sadondev.thamanya_assignment.ui.mapper.toUiSections
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
 class DashboardViewModel(
-    private val useCase: GetMainContentUseCase
+    private val useCase: GetMainContentUseCase,
 ) : ViewModel() {
     private val _uiState = MutableStateFlow<DashboardViewState?>(null)
     val uiState: StateFlow<DashboardViewState?> = _uiState.asStateFlow()
@@ -23,6 +25,7 @@ class DashboardViewModel(
         _uiState.value = DashboardViewState.Loading
         viewModelScope.launch {
             useCase()
+                .map { it.sections.toUiSections() }
                 .catch {
                     _uiState.value = DashboardViewState.Error(it.message.toString())
                 }

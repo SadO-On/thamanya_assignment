@@ -23,8 +23,10 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.max
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import coil3.request.ImageRequest
@@ -76,6 +78,8 @@ fun SquareWidget(
             title,
             fontSize = 11.sp,
             fontWeight = FontWeight.W500,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
             color = MaterialTheme.colorScheme.onPrimary
         )
 
@@ -84,7 +88,11 @@ fun SquareWidget(
             horizontalArrangement = Arrangement.spacedBy(4.dp)
         ) {
             TimeChip(duration)
-            Text(info, color = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.60f))
+            Text(
+                info,
+                fontSize = 12.sp,
+                color = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.60f)
+            )
         }
     }
 }

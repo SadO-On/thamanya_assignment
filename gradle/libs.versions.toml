@@ -12,6 +12,7 @@ ktor = "3.2.3"
 kotlinx-serialization = "1.7.1"
 koin-bom = "4.1.0"
 coil = "3.0.0"
+materialIcon = "1.7.8"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -38,7 +39,7 @@ koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin-bom
 koin-android-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koin-bom" }
 coil = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil" }
 coil-network = { module = "io.coil-kt.coil3:coil-network-okhttp", version.ref = "coil" }
-
+material-icons ={ module ="androidx.compose.material:material-icons-extended", version.ref = "materialIcon"}
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }

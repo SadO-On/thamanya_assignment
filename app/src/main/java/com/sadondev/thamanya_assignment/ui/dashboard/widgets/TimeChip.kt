@@ -25,16 +25,16 @@ fun TimeChip(time: String, modifier: Modifier = Modifier) {
     Box(
         modifier = modifier
             .background(
-                color = MaterialTheme.colorScheme.onSurface,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
                 shape = RoundedCornerShape(50) // pill shape
             )
-            .padding(horizontal = 12.dp, vertical = 6.dp),
+            .padding(horizontal = 8.dp, vertical = 3.dp),
         contentAlignment = Alignment.Center
     ) {
         Text(
             text = time,
             color = Neutral98,
-            fontSize = 14.sp,
+            fontSize = 10.sp,
             fontWeight = FontWeight.Medium
         )
     }

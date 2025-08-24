@@ -24,6 +24,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.sadondev.thamanya_assignment.domain.models.Section
+import com.sadondev.thamanya_assignment.ui.models.UiSection
 import com.sadondev.thamanya_assignment.ui.theme.ThamanyaAssignmentTheme
 
 /**
@@ -31,7 +32,7 @@ import com.sadondev.thamanya_assignment.ui.theme.ThamanyaAssignmentTheme
  */
 @Composable
 fun SectionsRowWidget(
-    sections: List<Section>,
+    sections: List<UiSection>,
     selectedIndex: Int?,
     onSectionSelected: (Int) -> Unit,
     modifier: Modifier = Modifier,
