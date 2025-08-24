@@ -4,5 +4,5 @@ import com.sadondev.thamanya_assignment.domain.models.MainContent
 import kotlinx.coroutines.flow.Flow
 
 interface ThamanyaRepository {
-    fun mainContent(): Flow<MainContent>
+    fun mainContent(pagePath: String? = null): Flow<MainContent>
 }

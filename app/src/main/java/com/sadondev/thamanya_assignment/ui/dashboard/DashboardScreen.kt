@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -32,7 +33,6 @@ import com.sadondev.thamanya_assignment.ui.models.UiSection
 import com.sadondev.thamanya_assignment.ui.theme.ThamanyaAssignmentTheme
 import org.koin.androidx.compose.koinViewModel
 
-
 @Composable
 fun DashboardScreen(
     viewModel: DashboardViewModel = koinViewModel(),
@@ -41,24 +41,19 @@ fun DashboardScreen(
 ) {
     val uiState = viewModel.uiState.collectAsState()
 
-    DashboardContent(
-        (uiState.value as? DashboardViewState.Data)?.data ?: emptyList(),
-        isDark = isDark,
-        onToggle = onToggle
-    )
+    when (val state = uiState.value) {
+        is DashboardViewState.Data -> DashboardContent(
+            sections = state.sections,
+            isDark = isDark,
+            onToggle = onToggle,
+            nextPage = state.nextPage,
+            isLoadingMore = state.isLoadingMore,
+            onLoadMore = { viewModel.loadNextPage() }
+        )
 
-
-    when (uiState.value) {
-        is DashboardViewState.Data -> {
-
+        DashboardViewState.Loading -> CircularProgressIndicator()
+        is DashboardViewState.Error -> {/* show error */
         }
-
-        DashboardViewState.Loading -> {
-
-        }
-
-        is DashboardViewState.Error -> {}
-        else -> {}
     }
 }
 
@@ -67,7 +62,10 @@ fun DashboardScreen(
 private fun DashboardContent(
     sections: List<UiSection>,
     isDark: Boolean,
-    onToggle: () -> Unit
+    onToggle: () -> Unit,
+    isLoadingMore: Boolean,
+    nextPage: String?,
+    onLoadMore: () -> Unit
 ) {
     var selected by remember { mutableIntStateOf(0) }
     val safeIndex = selected.coerceIn(0, (sections.size - 1).coerceAtLeast(0))
@@ -117,7 +115,13 @@ private fun DashboardContent(
             if (sections.isEmpty()) return@Surface
 
             when (val section = sections[safeIndex]) {
-                is UiSection.Square -> SquareGrid(uiCards = section.items)
+                is UiSection.Square -> SquareGrid(
+                    uiCards = section.items,
+                    isLoadingMore = isLoadingMore,
+                    onLoadMore = onLoadMore,
+                    nextPage = nextPage
+                )
+
                 is UiSection.Grid2Lines -> Text("Not Yet") //TwoLineGrid(items = section.items)
                 is UiSection.BigSquare -> Text("Not Yet")// BigSquareGrid(items = section.items)
                 is UiSection.Queue -> Text("Not Yet")// QueueList(items = section.items)
@@ -132,7 +136,13 @@ private fun DashboardContent(
 @Composable
 private fun DashboardContentPreview() {
     ThamanyaAssignmentTheme(darkTheme = false) {
-        Surface { DashboardContent(emptyList(), false, {}) }
+        Surface {
+            DashboardContent(
+                emptyList(), false, {}, isLoadingMore = false,
+                onLoadMore = { },
+                nextPage = ""
+            )
+        }
     }
 }
 
@@ -143,6 +153,13 @@ private fun DashboardContentPreview() {
 @Composable
 private fun DashboardContentDarkModePreview() {
     ThamanyaAssignmentTheme(darkTheme = true) {
-        Surface { DashboardContent(emptyList(), false, {}) }
+        Surface {
+            DashboardContent(
+                emptyList(), false, {},
+                isLoadingMore = false,
+                onLoadMore = { }, nextPage = ""
+
+            )
+        }
     }
 }

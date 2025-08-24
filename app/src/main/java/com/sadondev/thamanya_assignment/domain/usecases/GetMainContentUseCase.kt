@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 
 class GetMainContentUseCase(private val repository: ThamanyaRepository) {
 
-    operator fun invoke(): Flow<MainContent> {
-        return repository.mainContent()
+    operator fun invoke(pagePath: String? = null): Flow<MainContent> {
+        return repository.mainContent(pagePath)
     }
 }

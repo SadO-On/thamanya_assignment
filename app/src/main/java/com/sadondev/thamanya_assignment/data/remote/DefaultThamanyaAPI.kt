@@ -18,15 +18,23 @@ import kotlinx.serialization.json.Json
 class DefaultThamanyaAPI(
     private val client: HttpClient,
 ) : ThamanyaAPI {
-    override fun getMainContent(): Flow<MainContentRemote> = flow {
-        val payload: MainContentRemote = client.get(MAIN_CONTENT_URL).body()
-        emit(payload)
+    override fun getMainContent(pagePath: String?): Flow<MainContentRemote> = flow {
+        val url = pagePath?.let(::toAbsoluteUrl) ?: "$BASE_URL/home_sections"
+        emit(client.get(url).body<MainContentRemote>())
     }.retryWhen { cause, attempt ->
         (cause is java.io.IOException || cause !is kotlinx.coroutines.CancellationException) &&
                 attempt < 3
     }.catch { e ->
         throw e
     }.flowOn(Dispatchers.IO)
+
+
+    private fun toAbsoluteUrl(path: String): String =
+        if (path.startsWith("http")) path
+        else BASE_URL.trimEnd('/') + "/" + path.trimStart('/')
+
+    private companion object {
+        const val BASE_URL = "https://api-v2-b2sit6oh3a-uc.a.run.app"
+    }
 }
 
-const val MAIN_CONTENT_URL = "https://api-v2-b2sit6oh3a-uc.a.run.app/home_sections"

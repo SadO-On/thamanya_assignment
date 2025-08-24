@@ -12,8 +12,8 @@ class DefaultThamanyaRepository(
     private val api: ThamanyaAPI,
     private val json: Json = Json { ignoreUnknownKeys = true },
 ) : ThamanyaRepository {
-    override fun mainContent(): Flow<MainContent> {
-        return api.getMainContent()
+    override fun mainContent(pagePath: String?): Flow<MainContent> {
+        return api.getMainContent(pagePath)
             .map { remote: MainContentRemote ->
             remote.toDomain(json)
         }

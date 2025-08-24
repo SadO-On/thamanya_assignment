@@ -5,5 +5,5 @@ import com.sadondev.thamanya_assignment.domain.models.MainContent
 import kotlinx.coroutines.flow.Flow
 
 interface ThamanyaAPI {
-    fun getMainContent(): Flow<MainContentRemote>
+    fun getMainContent(pagePath: String? = null): Flow<MainContentRemote>
 }
