@@ -61,6 +61,7 @@ dependencies {
     implementation(libs.coil.network)
     implementation(libs.koin.android.compose)
     implementation(libs.material.icons)
+    implementation(libs.system.ui)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

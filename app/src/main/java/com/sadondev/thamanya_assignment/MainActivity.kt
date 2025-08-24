@@ -17,6 +17,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.sadondev.thamanya_assignment.ui.dashboard.DashboardScreen
+import com.sadondev.thamanya_assignment.ui.dashboard.widgets.ApplySystemBars
 import com.sadondev.thamanya_assignment.ui.theme.ThamanyaAssignmentTheme
 
 class MainActivity : ComponentActivity() {
@@ -28,6 +29,7 @@ class MainActivity : ComponentActivity() {
 
             ThamanyaAssignmentTheme(darkTheme = isDark, dynamicColor = false) {
                 Surface {
+                    ApplySystemBars(darkTheme = isDark)
                     DashboardScreen(
                         isDark = isDark,
                         onToggle = {
