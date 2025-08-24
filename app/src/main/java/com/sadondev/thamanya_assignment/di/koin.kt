@@ -6,6 +6,7 @@ import com.sadondev.thamanya_assignment.data.remote.DefaultThamanyaAPI
 import com.sadondev.thamanya_assignment.data.remote.KtorClient
 import com.sadondev.thamanya_assignment.data.remote.ThamanyaAPI
 import com.sadondev.thamanya_assignment.domain.usecases.GetMainContentUseCase
+import com.sadondev.thamanya_assignment.domain.usecases.SearchContentUseCase
 import com.sadondev.thamanya_assignment.ui.dashboard.DashboardViewModel
 import org.koin.core.module.dsl.bind
 import org.koin.core.module.dsl.singleOf
@@ -31,6 +32,9 @@ val repoModule = module {
 val useCasesModule = module {
     factory {
         GetMainContentUseCase(repository = get())
+    }
+    factory {
+        SearchContentUseCase(repository = get())
     }
 }
 

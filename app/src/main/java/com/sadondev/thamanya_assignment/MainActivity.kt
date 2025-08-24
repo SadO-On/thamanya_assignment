@@ -4,18 +4,11 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import com.sadondev.thamanya_assignment.ui.dashboard.DashboardScreen
 import com.sadondev.thamanya_assignment.ui.dashboard.widgets.ApplySystemBars
 import com.sadondev.thamanya_assignment.ui.theme.ThamanyaAssignmentTheme
@@ -44,3 +37,10 @@ class MainActivity : ComponentActivity() {
 
 
 
+/**
+ * Polish list
+ * [] Modify correct information for all models
+ * [] Fix colors
+ * [] Make sure All widgets has Preview
+ * [] Rive Loading
+ * */

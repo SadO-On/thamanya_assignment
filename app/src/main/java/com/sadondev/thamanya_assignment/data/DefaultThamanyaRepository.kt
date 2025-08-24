@@ -15,7 +15,14 @@ class DefaultThamanyaRepository(
     override fun mainContent(pagePath: String?): Flow<MainContent> {
         return api.getMainContent(pagePath)
             .map { remote: MainContentRemote ->
-            remote.toDomain(json)
-        }
+                remote.toDomain(json)
+            }
+    }
+
+    override fun searchContent(text: String?): Flow<MainContent> {
+        return api.searchContent(text)
+            .map { remote: MainContentRemote ->
+                remote.toDomain(json)
+            }
     }
 }

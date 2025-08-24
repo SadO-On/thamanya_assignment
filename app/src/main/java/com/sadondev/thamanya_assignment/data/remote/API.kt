@@ -6,4 +6,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface ThamanyaAPI {
     fun getMainContent(pagePath: String? = null): Flow<MainContentRemote>
+    fun searchContent(text: String? = null): Flow<MainContentRemote>
 }

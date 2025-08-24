@@ -28,6 +28,14 @@ class DefaultThamanyaAPI(
         throw e
     }.flowOn(Dispatchers.IO)
 
+    override fun searchContent(text: String?): Flow<MainContentRemote> = flow {
+        emit(client.get(SEARCH_BASE_URL).body<MainContentRemote>())
+    }.retryWhen { cause, attempt ->
+        (cause is java.io.IOException || cause !is kotlinx.coroutines.CancellationException) &&
+                attempt < 3
+    }.catch { e ->
+        throw e
+    }.flowOn(Dispatchers.IO)
 
     private fun toAbsoluteUrl(path: String): String =
         if (path.startsWith("http")) path
@@ -35,6 +43,7 @@ class DefaultThamanyaAPI(
 
     private companion object {
         const val BASE_URL = "https://api-v2-b2sit6oh3a-uc.a.run.app"
+        const val SEARCH_BASE_URL = "https://mock.apidog.com/m1/735111-711675-default/search"
     }
 }
 
