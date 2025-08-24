@@ -17,7 +17,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalInspectionMode
@@ -26,7 +25,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.max
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import coil3.request.ImageRequest
@@ -36,7 +34,7 @@ import com.sadondev.thamanya_assignment.formatTime
 import com.sadondev.thamanya_assignment.ui.theme.ThamanyaAssignmentTheme
 
 @Composable
-fun SquareWidget(
+fun BigSquareWidget(
     modifier: Modifier = Modifier,
     imageUrl: String?,
     title: String,
@@ -45,7 +43,7 @@ fun SquareWidget(
 ) {
     val isPreview = LocalInspectionMode.current
     val base = Modifier
-        .size(114.dp)
+        .size(180.dp)
         .clip(RoundedCornerShape(8.dp))
         .background(color = Color.White, shape = RoundedCornerShape(8.dp))
     Column(
@@ -76,7 +74,7 @@ fun SquareWidget(
 
         Text(
             title,
-            fontSize = 11.sp,
+            fontSize = 14.sp,
             fontWeight = FontWeight.W500,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
@@ -90,7 +88,7 @@ fun SquareWidget(
             TimeChip(duration)
             Text(
                 info,
-                fontSize = 12.sp,
+                fontSize = 16.sp,
                 color = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.60f)
             )
         }
@@ -98,12 +96,13 @@ fun SquareWidget(
 }
 
 
+
 @Preview(showBackground = true)
 @Composable
 private fun SquareWidgetPreview() {
     ThamanyaAssignmentTheme(darkTheme = false, dynamicColor = false) {
         Surface {
-            SquareWidget(
+            BigSquareWidget(
                 imageUrl = "https://fastly.picsum.photos/id/47/200/200.jpg?hmac=dF66rvzPwuJCh4L7IjS6I0D5xrpPvqhAjbE7FstnEnY",
                 title = "The Big Listen",
                 duration = formatTime(266195L),
@@ -121,7 +120,7 @@ private fun SquareWidgetPreview() {
 private fun SquareWidgetPreviewDarkMode() {
     ThamanyaAssignmentTheme(darkTheme = true, dynamicColor = false) {
         Surface {
-            SquareWidget(
+            BigSquareWidget(
                 imageUrl = "https://fastly.picsum.photos/id/47/200/200.jpg?hmac=dF66rvzPwuJCh4L7IjS6I0D5xrpPvqhAjbE7FstnEnY",
                 title = "The Big Listen",
                 duration = formatTime(266195L),

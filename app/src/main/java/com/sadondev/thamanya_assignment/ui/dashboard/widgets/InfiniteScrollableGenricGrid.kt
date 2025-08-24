@@ -18,21 +18,24 @@ import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import com.sadondev.thamanya_assignment.domain.models.LayoutType
 import com.sadondev.thamanya_assignment.ui.models.UiCard
 import kotlinx.coroutines.flow.distinctUntilChanged
-import kotlin.let
 
 
 @Composable
-fun SquareGrid(
+fun InfiniteScrollableGenricGrid(
     modifier: Modifier = Modifier,
     uiCards: List<UiCard>,
+    numberOfColumns: Int,
+    layoutType: LayoutType,
     isLoadingMore: Boolean,
     nextPage: String?,
     onLoadMore: () -> Unit,
     loadMoreThreshold: Int = 12,
     gridState: LazyGridState = rememberLazyGridState(),
 ) {
+
 
     var lastRequestedKey by remember { mutableStateOf<String?>(null) }
 
@@ -70,18 +73,31 @@ fun SquareGrid(
 
     LazyVerticalGrid(
         state = gridState,
-        columns = GridCells.Fixed(3),
+        columns = GridCells.Fixed(numberOfColumns),
         modifier = modifier
     ) {
-        items(uiCards, key = { it.id }) { card ->
-            SquareWidget(
-                modifier = Modifier,
-                imageUrl = card.imageUrl,
-                title = card.title,
-                duration = card.durationText ?: "",
-                info = card.subtitle.toString()
-            )
+        if (layoutType == LayoutType.BIG_SQUARE) {
+            items(uiCards, key = { it.id }) { card ->
+                BigSquareWidget(
+                    modifier = Modifier,
+                    imageUrl = card.imageUrl,
+                    title = card.title,
+                    duration = card.durationText ?: "",
+                    info = card.subtitle.toString()
+                )
+            }
+        } else {
+            items(uiCards, key = { it.id }) { card ->
+                SquareWidget(
+                    modifier = Modifier,
+                    imageUrl = card.imageUrl,
+                    title = card.title,
+                    duration = card.durationText ?: "",
+                    info = card.subtitle.toString()
+                )
+            }
         }
+
         if (isLoadingMore) {
             item(span = { androidx.compose.foundation.lazy.grid.GridItemSpan(maxLineSpan) }) {
                 Box(Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {

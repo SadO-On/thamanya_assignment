@@ -20,11 +20,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.sadondev.thamanya_assignment.ui.models.UiCard
 import kotlinx.coroutines.flow.distinctUntilChanged
-import kotlin.let
-
 
 @Composable
-fun SquareGrid(
+fun BigSquareGrid(
     modifier: Modifier = Modifier,
     uiCards: List<UiCard>,
     isLoadingMore: Boolean,

@@ -23,9 +23,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.sadondev.thamanya_assignment.R
+import com.sadondev.thamanya_assignment.domain.models.LayoutType
 import com.sadondev.thamanya_assignment.domain.models.LayoutType.*
 import com.sadondev.thamanya_assignment.domain.models.Section
 import com.sadondev.thamanya_assignment.ui.dashboard.widgets.Avatar
+import com.sadondev.thamanya_assignment.ui.dashboard.widgets.InfiniteScrollableGenricGrid
 import com.sadondev.thamanya_assignment.ui.dashboard.widgets.SectionsRowWidget
 import com.sadondev.thamanya_assignment.ui.dashboard.widgets.SquareGrid
 import com.sadondev.thamanya_assignment.ui.dashboard.widgets.ThemeSwitcherButton
@@ -115,15 +117,25 @@ private fun DashboardContent(
             if (sections.isEmpty()) return@Surface
 
             when (val section = sections[safeIndex]) {
-                is UiSection.Square -> SquareGrid(
+                is UiSection.Square -> InfiniteScrollableGenricGrid(
                     uiCards = section.items,
                     isLoadingMore = isLoadingMore,
+                    numberOfColumns = 3,
+                    layoutType = SQUARE,
                     onLoadMore = onLoadMore,
                     nextPage = nextPage
                 )
 
                 is UiSection.Grid2Lines -> Text("Not Yet") //TwoLineGrid(items = section.items)
-                is UiSection.BigSquare -> Text("Not Yet")// BigSquareGrid(items = section.items)
+                is UiSection.BigSquare -> InfiniteScrollableGenricGrid(
+                    uiCards = section.items,
+                    isLoadingMore = isLoadingMore,
+                    numberOfColumns = 2,
+                    layoutType = SQUARE,
+                    onLoadMore = onLoadMore,
+                    nextPage = nextPage
+                )
+
                 is UiSection.Queue -> Text("Not Yet")// QueueList(items = section.items)
                 is UiSection.Unknown -> Text("Unsupported section")
             }
