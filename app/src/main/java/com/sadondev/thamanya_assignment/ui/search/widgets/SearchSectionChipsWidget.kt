@@ -34,14 +34,13 @@ fun SearchSectionChipsWidget(
     modifier: Modifier = Modifier,
     contentPadding: PaddingValues = PaddingValues(horizontal = 16.dp),
     itemSpacing: Dp = 8.dp,
-    shape: Shape = MaterialTheme.shapes.large, // pill-like with your theme
+    shape: Shape = MaterialTheme.shapes.large,
     scrollToSelected: Boolean = true
 ) {
     val listState = rememberLazyListState()
 
     if (scrollToSelected && selectedIndex != null) {
         LaunchedEffect(selectedIndex) {
-            // Ensure the selected chip is visible when it changes
             listState.animateScrollToItem(selectedIndex.coerceAtLeast(0))
         }
     }
@@ -74,7 +73,7 @@ fun SearchSectionChipsWidget(
                 ),
                 colors = FilterChipDefaults.filterChipColors(
                     containerColor = MaterialTheme.colorScheme.surface,
-                    labelColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                    labelColor = MaterialTheme.colorScheme.primaryContainer,
                     selectedContainerColor = MaterialTheme.colorScheme.primaryContainer,
                     selectedLabelColor = MaterialTheme.colorScheme.onPrimaryContainer,
                     iconColor = MaterialTheme.colorScheme.onSurfaceVariant,

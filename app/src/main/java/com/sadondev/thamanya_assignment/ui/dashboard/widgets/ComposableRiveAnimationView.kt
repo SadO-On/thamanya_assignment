@@ -27,8 +27,6 @@ fun ComposableRiveAnimationView(
         modifier = modifier,
         factory = { context ->
             val rive = RiveAnimationView(context)
-            rive.controller.setBooleanState(stateMachineName!!, "dark", isDark)
-
             rive.also {
                 it.setRiveResource(
                     resId = animation,

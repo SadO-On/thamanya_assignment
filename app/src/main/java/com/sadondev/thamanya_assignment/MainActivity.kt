@@ -17,9 +17,12 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            var isDark by rememberSaveable { mutableStateOf(true) }
+            var isDark by rememberSaveable { mutableStateOf(false) }
 
-            ThamanyaAssignmentTheme(darkTheme = isDark, dynamicColor = false) {
+            ThamanyaAssignmentTheme(darkTheme = isDark, dynamicColor = false,
+
+
+                ) {
                 Surface {
                     ApplySystemBars(darkTheme = isDark)
                     MainNavGraph(
@@ -38,10 +41,9 @@ class MainActivity : ComponentActivity() {
 
 /**
  * Polish list
- * [] Modify correct information for all models
- * [] Fix colors
- * [] Make sure All widgets has Preview
+ * [X] Modify correct information for all models
+ * [X] Fix colors
  * [X] Rive Loading
  * [] Remove unnecessary comments
- *
+ * [] Font
  * */

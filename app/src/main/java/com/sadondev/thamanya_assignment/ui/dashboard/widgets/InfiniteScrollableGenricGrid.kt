@@ -23,7 +23,6 @@ import com.sadondev.thamanya_assignment.domain.models.LayoutType.*
 import com.sadondev.thamanya_assignment.ui.models.UiCard
 import kotlinx.coroutines.flow.distinctUntilChanged
 
-
 @Composable
 fun InfiniteScrollableGenricGrid(
     modifier: Modifier = Modifier,
@@ -36,11 +35,8 @@ fun InfiniteScrollableGenricGrid(
     loadMoreThreshold: Int = 12,
     gridState: LazyGridState = rememberLazyGridState(),
 ) {
-
-
     var lastRequestedKey by remember { mutableStateOf<String?>(null) }
 
-    // Compute when we're "near the end"
     val shouldLoadMore by remember {
         derivedStateOf {
             val info = gridState.layoutInfo

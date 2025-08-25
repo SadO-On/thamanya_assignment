@@ -17,7 +17,6 @@ import org.koin.test.inject
 class DefaultThamanyaRepositoryTest : KoinTest {
     @After
     fun tearDown() {
-        // ensure a clean Koin between tests
         stopKoin()
     }
 
@@ -32,8 +31,6 @@ class DefaultThamanyaRepositoryTest : KoinTest {
         val repo by inject<ThamanyaRepository>()
         repo.mainContent().test {
             val domain = awaitItem()
-            // Assert meaningful domain fields that your mapper sets.
-            // Adjust these to your actual domain models.
             assertThat(domain.sections).isNotEmpty()
             assertThat(domain.pagination?.nextPage).isNotEmpty()
             awaitComplete()
@@ -51,7 +48,6 @@ class DefaultThamanyaRepositoryTest : KoinTest {
         val repo by inject<ThamanyaRepository>()
         repo.searchContent(text = "politics").test {
             val result = awaitItem()
-            // Assert fields produced by ContentSearchRemote.toDomain()
             assertThat(result.sections).isNotEmpty()
             awaitComplete()
         }

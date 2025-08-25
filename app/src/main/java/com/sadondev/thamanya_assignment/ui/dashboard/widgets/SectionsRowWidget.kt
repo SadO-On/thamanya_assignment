@@ -24,6 +24,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.sadondev.thamanya_assignment.ui.models.UiSection
+import com.sadondev.thamanya_assignment.ui.models.dummy
 import com.sadondev.thamanya_assignment.ui.theme.ThamanyaAssignmentTheme
 
 
@@ -74,7 +75,7 @@ fun SectionsRowWidget(
                 ),
                 colors = FilterChipDefaults.filterChipColors(
                     containerColor = MaterialTheme.colorScheme.surface,
-                    labelColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                    labelColor = MaterialTheme.colorScheme.onPrimaryContainer,
                     selectedContainerColor = MaterialTheme.colorScheme.primaryContainer,
                     selectedLabelColor = MaterialTheme.colorScheme.onPrimaryContainer,
                     iconColor = MaterialTheme.colorScheme.onSurfaceVariant,
@@ -93,7 +94,7 @@ private fun SectionsRowWidgetPreviewLight() {
         Surface {
             var selected by remember { mutableIntStateOf(0) }
             SectionsRowWidget(
-                sections = emptyList(),
+                sections = dummy,
                 selectedIndex = selected,
                 onSectionSelected = { selected = it }
             )
@@ -113,7 +114,7 @@ private fun SectionsRowWidgetPreviewDark() {
         Surface {
             var selected by remember { mutableIntStateOf(3) }
             SectionsRowWidget(
-                sections = emptyList(),
+                sections = dummy,
                 selectedIndex = selected,
                 onSectionSelected = { selected = it }
             )

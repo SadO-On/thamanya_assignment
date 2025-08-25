@@ -98,7 +98,6 @@ fun ThamanyaAssignmentTheme(
 
     MaterialTheme(
         colorScheme = colorScheme,
-        typography = Typography, // keep your existing Typography.kt
         content = {
             Box(
                 modifier = Modifier

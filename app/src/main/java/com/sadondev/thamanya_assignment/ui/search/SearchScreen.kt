@@ -91,10 +91,3 @@ private fun SearchContent(
         }
     }
 }
-
-
-@Preview
-@Composable
-private fun SearchContentPreview() {
-
-}

@@ -55,3 +55,10 @@ sealed class UiSection {
         override val items: List<UiCard> = emptyList()
     }
 }
+
+val dummy = listOf(UiSection.Square(
+    name = "Test",
+    layout = LayoutType.SQUARE,
+    order = 1,
+    items = emptyList()
+))

@@ -20,7 +20,6 @@ class DefaultThamanyaAPITest {
 
     @After
     fun tearDown() {
-        // ensure a clean Koin between tests
         stopKoin()
     }
 
@@ -33,7 +32,6 @@ class DefaultThamanyaAPITest {
             respond(content = page1, headers = jsonHeaders)
         }
 
-        // start Koin for THIS test
         startKoin { modules(testModule(engine)) }
 
         val api: ThamanyaAPI = getKoin().get()
@@ -91,9 +89,6 @@ class DefaultThamanyaAPITest {
     }
 }
 
-// ---- helpers ----
-
-// Put files under src/test/resources (not res/).
 fun loadJson(path: String): String {
     val stream = requireNotNull(
         object {}.javaClass.classLoader?.getResourceAsStream(path)
