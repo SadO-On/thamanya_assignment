@@ -1,19 +1,16 @@
 package com.sadondev.thamanya_assignment.data.remote
 
+import com.sadondev.thamanya_assignment.data.remote.model.ContentSearchRemote
 import com.sadondev.thamanya_assignment.data.remote.model.MainContentRemote
-import com.sadondev.thamanya_assignment.domain.mapper.toDomain
-import com.sadondev.thamanya_assignment.domain.models.MainContent
-import io.ktor.client.*
-import io.ktor.client.request.*
+import io.ktor.client.HttpClient
 import io.ktor.client.call.body
+import io.ktor.client.request.get
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.retryWhen
-import kotlinx.serialization.json.Json
 
 class DefaultThamanyaAPI(
     private val client: HttpClient,
@@ -28,8 +25,8 @@ class DefaultThamanyaAPI(
         throw e
     }.flowOn(Dispatchers.IO)
 
-    override fun searchContent(text: String?): Flow<MainContentRemote> = flow {
-        emit(client.get(SEARCH_BASE_URL).body<MainContentRemote>())
+    override fun searchContent(text: String?): Flow<ContentSearchRemote> = flow {
+        emit(client.get(SEARCH_BASE_URL).body<ContentSearchRemote>())
     }.retryWhen { cause, attempt ->
         (cause is java.io.IOException || cause !is kotlinx.coroutines.CancellationException) &&
                 attempt < 3

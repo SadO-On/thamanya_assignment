@@ -42,7 +42,7 @@ class SearchViewModel(
                         .onStart {
                             _uiState.value = SearchViewState.Loading
                         }
-                        .map { main -> main.sections.toUiSections() }
+                        .map { main -> main }
 
                 }
                 .catch { e -> SearchViewState.Error(e.message ?: "Unknown error") }

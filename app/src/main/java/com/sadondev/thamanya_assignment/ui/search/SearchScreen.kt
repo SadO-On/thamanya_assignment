@@ -15,10 +15,14 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.sadondev.thamanya_assignment.domain.models.ContentSearch
+import com.sadondev.thamanya_assignment.domain.models.MainContent
+import com.sadondev.thamanya_assignment.domain.models.SearchSection
 import com.sadondev.thamanya_assignment.ui.dashboard.widgets.QueueWidget
 import com.sadondev.thamanya_assignment.ui.dashboard.widgets.SectionsRowWidget
 import com.sadondev.thamanya_assignment.ui.models.UiSection
 import com.sadondev.thamanya_assignment.ui.search.widgets.BackSearchRowWidget
+import com.sadondev.thamanya_assignment.ui.search.widgets.SearchSectionChipsWidget
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
@@ -33,7 +37,7 @@ fun SearchScreen(
     SearchContent(
         query = viewModel.query.collectAsState().value,
         onSearch = {},
-        sections = (uiState.value as? SearchViewState.Data)?.sections ?: emptyList(),
+        sections = (uiState.value as? SearchViewState.Data)?.value?.sections ?: emptyList(),
         onQueryChange = viewModel::onQueryChange,
         onBackClick = onBackClick
     )
@@ -44,7 +48,7 @@ fun SearchScreen(
 @Composable
 private fun SearchContent(
     query: String,
-    sections: List<UiSection> = emptyList<UiSection>(),
+    sections: List<SearchSection>,
     onQueryChange: (String) -> Unit,
     onSearch: (String) -> Unit,
     onBackClick: () -> Unit
@@ -59,14 +63,12 @@ private fun SearchContent(
             Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 BackSearchRowWidget(
                     query = query,
-                    onQueryChange =onQueryChange,
+                    onQueryChange = onQueryChange,
                     onBackClick = onBackClick,
-                    onSearch = {
-
-                    }
+                    onSearch = onSearch
                 )
 
-                SectionsRowWidget(
+                SearchSectionChipsWidget(
                     sections = sections,
                     selectedIndex = selected,
                     onSectionSelected = { selected = it }
@@ -75,17 +77,20 @@ private fun SearchContent(
 
         }
     ) { innerPadding ->
-        LazyColumn(modifier = Modifier.padding(innerPadding)) {
+        LazyColumn(
+            modifier = Modifier.padding(innerPadding),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
             if (sections.isEmpty()) return@LazyColumn
 
-            val section = sections[safeIndex]
-            items(section.items.size) { index ->
+            val section = sections[safeIndex].content
+            items(section.size) { index ->
                 QueueWidget(
-                    modifier = Modifier,
-                    imageUrl = section.items[index].imageUrl,
-                    title = section.items[index].title,
-                    duration = section.items[index].durationText ?: "",
-                    info = section.items[index].subtitle.toString()
+                    modifier = Modifier.padding(horizontal = 16.dp),
+                    imageUrl = section[index].imageUrl,
+                    title = section[index].name,
+                    duration = section[index].duration ?: "",
+                    info = section[index].episodeCount.toString()
                 )
             }
         }
