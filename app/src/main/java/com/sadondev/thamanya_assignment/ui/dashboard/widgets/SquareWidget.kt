@@ -55,7 +55,7 @@ fun SquareWidget(
             TimeChip(duration)
             Text(
                 info,
-                fontSize = 12.sp,
+                fontSize = 10.sp,
                 color = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.60f)
             )
         }

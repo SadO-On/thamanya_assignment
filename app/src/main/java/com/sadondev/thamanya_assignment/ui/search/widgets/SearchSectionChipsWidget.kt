@@ -24,8 +24,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.sadondev.thamanya_assignment.domain.models.SearchSection
-import com.sadondev.thamanya_assignment.ui.dashboard.widgets.SectionsRowWidget
-import com.sadondev.thamanya_assignment.ui.models.UiSection
 import com.sadondev.thamanya_assignment.ui.theme.ThamanyaAssignmentTheme
 
 @Composable
@@ -94,7 +92,7 @@ private fun SearchSectionChipsWidgetPreviewLight() {
     ThamanyaAssignmentTheme(darkTheme = false, dynamicColor = false) {
         Surface {
             var selected by remember { mutableIntStateOf(0) }
-            SectionsRowWidget(
+            SearchSectionChipsWidget(
                 sections = emptyList(),
                 selectedIndex = selected,
                 onSectionSelected = { selected = it }
@@ -114,7 +112,7 @@ private fun SearchSectionChipsWidgetPreviewDark() {
     ThamanyaAssignmentTheme(darkTheme = true, dynamicColor = false) {
         Surface {
             var selected by remember { mutableIntStateOf(3) }
-            SectionsRowWidget(
+            SearchSectionChipsWidget(
                 sections = emptyList(),
                 selectedIndex = selected,
                 onSectionSelected = { selected = it }

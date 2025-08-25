@@ -23,13 +23,10 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.sadondev.thamanya_assignment.domain.models.Section
 import com.sadondev.thamanya_assignment.ui.models.UiSection
 import com.sadondev.thamanya_assignment.ui.theme.ThamanyaAssignmentTheme
 
-/**
- * A horizontally scrollable row of single-select chips.
- */
+
 @Composable
 fun SectionsRowWidget(
     sections: List<UiSection>,
@@ -45,7 +42,6 @@ fun SectionsRowWidget(
 
     if (scrollToSelected && selectedIndex != null) {
         LaunchedEffect(selectedIndex) {
-            // Ensure the selected chip is visible when it changes
             listState.animateScrollToItem(selectedIndex.coerceAtLeast(0))
         }
     }
