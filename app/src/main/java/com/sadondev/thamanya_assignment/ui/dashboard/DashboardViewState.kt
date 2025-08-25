@@ -8,5 +8,6 @@ sealed class DashboardViewState {
         val sections: List<UiSection>,
         val nextPage: String?,
         val isLoadingMore: Boolean = false
-    ) : DashboardViewState()    data class Error(private val message: String) : DashboardViewState()
+    ) : DashboardViewState()
+    data class Error(val message: String) : DashboardViewState()
 }

@@ -11,16 +11,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.sadondev.thamanya_assignment.domain.models.ContentSearch
-import com.sadondev.thamanya_assignment.domain.models.MainContent
 import com.sadondev.thamanya_assignment.domain.models.SearchSection
 import com.sadondev.thamanya_assignment.ui.dashboard.widgets.QueueWidget
-import com.sadondev.thamanya_assignment.ui.dashboard.widgets.SectionsRowWidget
-import com.sadondev.thamanya_assignment.ui.models.UiSection
 import com.sadondev.thamanya_assignment.ui.search.widgets.BackSearchRowWidget
 import com.sadondev.thamanya_assignment.ui.search.widgets.SearchSectionChipsWidget
 import org.koin.compose.viewmodel.koinViewModel

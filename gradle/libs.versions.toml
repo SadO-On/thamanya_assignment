@@ -16,7 +16,8 @@ materialIcon = "1.7.8"
 systemUi = "0.34.0"
 foundation = "1.9.0"
 nav_version = "2.9.3"
-
+rive-runtime = "10.4.2"
+startup = "1.2.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -47,6 +48,8 @@ material-icons ={ module ="androidx.compose.material:material-icons-extended", v
 system-ui = {module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "systemUi"}
 androidx-foundation = { group = "androidx.compose.foundation", name = "foundation", version.ref = "foundation" }
 compose-navigation = { module = "androidx.navigation:navigation-compose", version.ref = "nav_version"}
+androidx-startup = { module = "androidx.startup:startup-runtime", version.ref = "startup"}
+rive = { module = "app.rive:rive-android", version.ref = "rive-runtime"}
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

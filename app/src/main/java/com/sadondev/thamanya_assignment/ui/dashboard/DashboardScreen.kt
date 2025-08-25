@@ -1,16 +1,16 @@
 package com.sadondev.thamanya_assignment.ui.dashboard
 
 import android.content.res.Configuration
+import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.DarkMode
-import androidx.compose.material.icons.filled.LightMode
 import androidx.compose.material.icons.filled.Search
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -25,6 +25,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -32,6 +33,7 @@ import com.sadondev.thamanya_assignment.R
 import com.sadondev.thamanya_assignment.domain.models.LayoutType
 import com.sadondev.thamanya_assignment.domain.models.LayoutType.SQUARE
 import com.sadondev.thamanya_assignment.ui.dashboard.widgets.Avatar
+import com.sadondev.thamanya_assignment.ui.dashboard.widgets.ComposableRiveAnimationView
 import com.sadondev.thamanya_assignment.ui.dashboard.widgets.InfiniteScrollableGenricGrid
 import com.sadondev.thamanya_assignment.ui.dashboard.widgets.SectionsRowWidget
 import com.sadondev.thamanya_assignment.ui.dashboard.widgets.ThemeSwitcherButton
@@ -47,6 +49,7 @@ fun DashboardScreen(
     onToggle: () -> Unit
 ) {
     val uiState = viewModel.uiState.collectAsState()
+    val context = LocalContext.current
 
     when (val state = uiState.value) {
         is DashboardViewState.Data -> DashboardContent(
@@ -59,8 +62,23 @@ fun DashboardScreen(
             onLoadMore = { viewModel.loadNextPage() }
         )
 
-        DashboardViewState.Loading -> CircularProgressIndicator()
-        is DashboardViewState.Error -> {/* show error */
+        DashboardViewState.Loading -> {
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ) {
+                ComposableRiveAnimationView(
+                    modifier = Modifier,
+                    isDark = isDark,
+                    animation = R.raw.thmanya,
+                    stateMachineName = "State Machine 1",
+                    onInit = { }
+                )
+            }
+        }
+
+        is DashboardViewState.Error -> {
+            Toast.makeText(context, state.message, Toast.LENGTH_LONG).show()
         }
     }
 }

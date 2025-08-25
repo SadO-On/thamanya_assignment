@@ -64,6 +64,8 @@ dependencies {
     implementation(libs.system.ui)
     implementation(libs.androidx.foundation)
     implementation(libs.compose.navigation)
+    implementation(libs.androidx.startup)
+    implementation(libs.rive)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

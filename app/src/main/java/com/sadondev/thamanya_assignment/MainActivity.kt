@@ -41,6 +41,7 @@ class MainActivity : ComponentActivity() {
  * [] Modify correct information for all models
  * [] Fix colors
  * [] Make sure All widgets has Preview
- * [] Rive Loading
+ * [X] Rive Loading
  * [] Remove unnecessary comments
+ *
  * */

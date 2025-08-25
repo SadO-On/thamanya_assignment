@@ -6,6 +6,7 @@ import com.sadondev.thamanya_assignment.domain.usecases.GetMainContentUseCase
 import com.sadondev.thamanya_assignment.ui.dashboard.merge.mergeWithCount
 import com.sadondev.thamanya_assignment.ui.mapper.toUiSections
 import com.sadondev.thamanya_assignment.ui.models.UiSection
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -36,6 +37,7 @@ class DashboardViewModel(
                 }
                 .catch { _uiState.value = DashboardViewState.Error(it.message ?: "Unknown error") }
                 .collect { uiSections ->
+                    delay(1000)
                     accumulated = uiSections
                     _uiState.value = DashboardViewState.Data(
                         sections = accumulated,
