@@ -41,7 +41,7 @@ android {
 }
 
 dependencies {
-
+    // --- implementation ---
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -57,9 +57,9 @@ dependencies {
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.ktor.client.android)
     implementation(libs.koin.android)
+    implementation(libs.koin.android.compose)
     implementation(libs.coil)
     implementation(libs.coil.network)
-    implementation(libs.koin.android.compose)
     implementation(libs.material.icons)
     implementation(libs.system.ui)
     implementation(libs.androidx.foundation)
@@ -67,11 +67,21 @@ dependencies {
     implementation(libs.androidx.startup)
     implementation(libs.rive)
 
+
     testImplementation(libs.junit)
+    testImplementation(libs.truth)
+    testImplementation(libs.turbine)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.ktor.client.mock)
+    testImplementation(libs.koin.test)
+    testImplementation(libs.koin.test.junit4)
+
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
+    androidTestImplementation(libs.kotlinx.coroutines.test)
+
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 }
